@@ -1,5 +1,5 @@
 import { UsersRepositories } from '../repositories/UsersRepositories'
-import {getCustomRepository} from 'typeorm'
+import { getCustomRepository } from 'typeorm'
 
 interface UserRequestInterface {
     name: string
@@ -12,7 +12,7 @@ class CreateUserService {
         const usersRepository = getCustomRepository(UsersRepositories)
 
         if (!email) {
-            throw new Error('Email incorrect.')
+            throw new Error('Email is a mandatory field.')
         }
 
         const userAlreadyExists = await usersRepository.findOne({
