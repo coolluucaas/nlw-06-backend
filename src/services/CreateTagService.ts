@@ -1,20 +1,18 @@
 import { getCustomRepository } from 'typeorm'
-import { TagsRepositories } from '../repositories/TagRepository'
-import { CreateUserService } from './CreateUserService'
+import { TagRepository } from '../repositories/TagRepository'
 
 interface TagRequestInterface {
     name: string
 }
-
 class CreateTagService {
     async execute({ name }: TagRequestInterface) {
-        const tagsRepository = getCustomRepository(TagsRepositories)
+        const tagRepository = getCustomRepository(TagRepository)
 
         if (!name) {
             throw new Error('Name is a mandatory field.')
         }
 
-        const tagAlreadyExists = await tagsRepository.findOne({
+        const tagAlreadyExists = await tagRepository.findOne({
             name,
         })
 
@@ -22,9 +20,9 @@ class CreateTagService {
             throw new Error('Duplicate tag.')
         }
 
-        const tag = tagsRepository.create({ name })
+        const tag = tagRepository.create({ name })
 
-        await tagsRepository.save(tag)
+        await tagRepository.save(tag)
 
         return tag
     }
