@@ -4,6 +4,9 @@ import 'express-async-errors'
 import './database'
 import { router } from './routes'
 
+import dotenv from 'dotenv'
+dotenv.config({ path: `./env/.env.${process.env.NODE_ENV}` })
+
 const app = express()
 
 app.use(express.json())
