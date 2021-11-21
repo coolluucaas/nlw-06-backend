@@ -23,7 +23,7 @@ class AuthenticateUserService {
         }
 
         if (!password) {
-            throw new Error('Password is a mandatory')
+            throw new Error('Password is a mandatory field.')
         }
 
         const user = await userRepository.findOne({
